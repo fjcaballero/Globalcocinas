@@ -1,0 +1,71 @@
+<!--
+@license
+@author Javier Caballero Abenza. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../paper-input/paper-textarea.html">
+<link rel="import" href="../iron-icons/communication-icons.html">
+
+<dom-module id="contact-wc">
+	<template>
+		<style is="custom-style">
+            :host{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+            }
+            paper-button{
+                margin: 20px auto;
+                width: 50%;
+            }
+            paper-button iron-icon{
+                position: absolute;
+                left: 10px;
+            }
+
+            paper-textarea::shadow textarea{
+                overflow: hidden;
+            }
+        </style>
+
+        <paper-input label="Nombre" value="{{nombre::input}}"></paper-input>
+        <paper-input label="Email" value="{{email::input}}">
+            <iron-icon icon="mail" slot="prefix"></iron-icon>
+        </paper-input>
+        <paper-input label="Teléfono" value="{{tlf::input}}">
+            <iron-icon icon="communication:call" slot="prefix"></iron-icon>
+        </paper-input>
+        <paper-textarea label="Mensaje" value="{{msg::input}}"></paper-textarea>
+        <paper-button raised on-click="sendEmail"><iron-icon icon="send"></iron-icon>Enviar</button>
+
+	</template>
+	<script>
+		Polymer({
+
+			is: 'contact-wc',
+
+			properties:{
+			},
+
+            sendEmail: function(){
+                emailjs.send("default_service","globalcocinas",
+                {
+                    name: this.nombre, 
+                    email: this.email,
+                    phone: this.tlf,
+                    message: this.msg
+                })
+                .then(function(response) {
+                    window.alert("Mensaje enviado");
+                }, function(err) {
+                    window.alert("No se ha podido enviar el mensaje");
+                });
+            }
+
+		});
+	</script>
+</dom-module>

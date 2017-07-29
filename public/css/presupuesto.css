@@ -1,0 +1,18 @@
+.presupuestoInfo h2{
+    color: #2196F3;
+    margin-bottom: 29px;
+}
+
+.presupuestoContainer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.presupuestoInfo{
+    max-width: 40%;
+    margin-right: 30px;
+    font-size: 16px;
+}

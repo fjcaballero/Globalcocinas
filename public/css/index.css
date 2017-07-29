@@ -1,0 +1,182 @@
+/*
+@license
+@author Javier Caballero Abenza. All rights reserved.
+*/
+html,body{
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+
+.content{
+	width: 100%;
+	min-height: calc(100vh - 90px - 64px);
+}
+
+.footer{
+    width: 100%;
+    background-color: #fafafa;
+    color: #676f7c;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+/* Main container */
+.container{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: #616161;
+}
+
+.row{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 30px;
+}
+
+/* HEADER */            
+paper-toolbar.toolbar{
+    font-family: "Sansita One";
+    background-color: #ffffff;
+    border-bottom: 1px solid #EEEEEE;
+    color: #616161;
+    height: auto;
+}
+
+paper-toolbar .bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+paper-toolbar.toolbar::shadow #topBar{
+    padding-left: 0;
+}
+
+iron-icon.homeIcon{
+    margin-right: 20px;
+    color: #616161;
+}
+
+.pageBtn, .sideBtn{
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #616161;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.pageBtn:hover{
+    color: black;
+}
+
+.pageBtn span, .sideBtn span{
+    align-self: center;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.home{
+    font-family: Pacifico;
+    font-size: 30px;
+    padding-right: 30px;
+    min-width: 188px;
+}
+
+.home:hover{
+    background: none;
+}
+
+.menuIcon{
+    display: none;
+}
+
+/* Sidebar */
+.sidebar{
+    position: absolute;
+    left: -50%;
+    transition: 0.5s ease;
+    background: #ffffff;
+    z-index: 1;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sideBtn{
+    padding: 20px 5px 20px 15px;
+    margin: 0;
+    font-size: 15px;
+    border-bottom: 1px solid black;
+}
+
+.activeTab{
+    color: black;
+}
+
+@media only screen and (max-device-width : 667px) {
+    .pageBtn:not(.home){
+        display: none;
+    }
+
+    .menuIcon{
+        display: inherit;
+    }
+
+    .home{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .service, .presupuestoContainer, .contactContainer{
+        flex-direction: column !important;
+    }
+
+    .presupuestoInfo, .formEmail, .map{
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .map{
+        margin-bottom: 0;
+    }
+
+    #map{
+        bottom: 70px !important;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-device-width : 667px) {
+
+	.content{
+		height: calc(100% - 56px);
+	}
+
+	.row{
+        display: flex;
+        flex-direction: column;
+    }
+}
+

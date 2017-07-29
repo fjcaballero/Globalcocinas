@@ -1,0 +1,28 @@
+.imagenHome{
+    width: 100%;
+}
+
+.service{
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.serviceInfo{
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px 0 30px;
+    text-align: center;
+} 
+
+.serviceInfo p{
+    font-size: 16px;
+    max-width: 400px;
+    text-align: justify;
+}
+
+.service img{
+    margin: 0px 40px 0px 40px;
+}

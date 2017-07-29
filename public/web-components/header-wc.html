@@ -1,0 +1,208 @@
+<!--
+@license
+@author Javier Caballero Abenza. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-toolbar/paper-toolbar.html">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Pacifico" />
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Sansita+One" />
+
+
+<dom-module id="header-wc">
+	<template>
+		
+		<style is="custom-style">
+			
+			:host{
+				--background: #ffffff;
+				--background-selected: var(--paper-grey-200);
+				--font-color: var(--paper-grey-500);
+				--font-color-selected: #000000;
+				font-family: "Sansita One";
+			}
+
+			paper-toolbar.toolbar{
+				--paper-toolbar-background: var(--background);
+				border-bottom: 1px solid var(--background-selected);
+				color: var(--font-color);
+				height: 90px !important;
+			}
+
+			paper-toolbar.toolbar::shadow #topBar{
+				padding-left: 0;
+			}
+
+			iron-icon.homeIcon{
+				margin-right: 20px;
+				color: var(--font-color);
+			}
+
+			.pageBtn, .sideBtn{
+				height: 100%;
+				padding-left: 15px;
+				padding-right: 15px;
+				display: flex;
+				color: var(--font-color);
+				cursor: pointer;
+				text-decoration: none;
+			}
+
+			.pageBtn:hover{
+				color: var(--font-color-selected);
+			}
+
+			.pageBtn span, .sideBtn span{
+				align-self: center;
+				text-transform: capitalize;
+				font-family: sans-serif;
+    			font-weight: 600;
+			}
+
+			.pageBtn:not(.home){
+				margin-top: 60px;
+			}
+
+			.home{
+				font-family: Pacifico;
+				font-size: 30px;
+				padding-right: 30px;
+				overflow: hidden;
+				white-space: nowrap;
+				min-width: 188px;
+			}
+
+			.home:hover{
+				background: none;
+			}
+
+			.menuIcon{
+				display: none;
+			}
+
+			/* Sidebar */
+			.sidebar{
+				position: absolute;
+				left: -50%;
+				transition: 0.5s ease;
+				background: var(--background);
+				z-index: 1;
+				width: 50%;
+			}
+
+			.sideBtn{
+				height: 50px;
+			}
+
+			.activeTab{
+				color: black;
+			}
+
+			@media only screen and (max-device-width : 667px) {
+				.pageBtn:not(.home){
+					display: none;
+				}
+
+				.menuIcon{
+					display: inherit;
+				}
+
+				.home{
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+
+		</style>
+
+		<!--.............................. HEADER .............................-->
+
+		<!-- Navbar and search -->
+		<paper-toolbar class="toolbar">
+			<!--iron-icon icon="home" src="{{icon}}" class="homeIcon"></iron-icon-->
+			<paper-icon-button icon="menu" class="menuIcon" on-tap="_toggle"></paper-icon-button>
+			<a class="pageBtn home" href="/" on-tap="none">{{home}}</a>
+			<template is="dom-repeat" items="{{tabsArray}}">
+				<a slot="middle" class="pageBtn" href="/{{getRef(index)}}" id="tab{{index}}" on-tap="setActive"><span>{{item}}</span></a>
+			</template>
+		</paper-toolbar>
+		
+		<div id="sidebar" class="sidebar">
+			<template is="dom-repeat" items="{{tabsArray}}">
+				<a class="sideBtn" href="/{{getRef(index)}}" on-tap="_toggle"><span>{{item}}</span></a>
+			</template>
+		</div>
+
+	</template>
+	<script>
+		Polymer({
+
+			is: 'header-wc',
+
+			properties:{
+				icon: {
+					type: String,
+					value: ""
+				},
+
+				tabs:{
+					type: String,
+					value: "",
+					observer: "newTabs"
+				},
+
+				refs:{
+					type: String,
+					value: ""
+				}
+
+			},
+
+			newTabs: function(){
+				if(this.tabs && this.refs){
+					var refsArray = this.refs.split(",");
+					for (var i = 0; i < refsArray.length; i++) {
+						refsArray[i] = refsArray[i].trim();
+					}
+					this.refsArray = refsArray;	
+
+					var tabsArray = this.tabs.split(",");
+					for (var i = 0; i < tabsArray.length; i++) {
+						tabsArray[i] = tabsArray[i].trim();
+					}
+					this.tabsArray = tabsArray;
+				}
+			},
+
+			_toggle: function(){
+				var left = this.$['sidebar'].style.left;
+						if(!left || left=="-50%"){
+				this.$['sidebar'].style.left="0";
+				}
+				else{
+				this.$['sidebar'].style.left="-50%";
+				}
+			},
+
+			getRef: function(index){
+				return this.refsArray[index];
+			},
+
+			setActive: function(e){
+				if(this.activeTab){
+					this.activeTab.className = this.activeTab.oldClass;
+				}
+				this.activeTab = e.srcElement;
+				this.activeTab.oldClass = this.activeTab.className;
+				this.activeTab.className += " activeTab";				
+			},
+
+			none: function(){/* Does nothing, but needed to fire event click */}
+
+		});
+	</script>
+</dom-module>

@@ -1,0 +1,17 @@
+.infoContainer{
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+}
+
+.infoContainer h1, .infoContainer h2{
+    color: #2196F3;
+}
+
+.infoContainer p{
+    text-align: justify;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+}

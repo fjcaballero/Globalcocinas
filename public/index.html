@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--
+@license
+@author Javier Caballero Abenza. All rights reserved.
+-->
+<html>
+<head>
+	<title>Globalcocinas</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Polyfill -->
+	<script src="webcomponentsjs/webcomponents-lite.min.js"></script>
+	<!-- Web components -->
+	<link rel="import" href="web-components/header-wc.html">
+	<link rel="import" href="web-components/contact-wc.html">
+	<link rel="import" href="web-components/lanloader-wc.html">
+	<link rel="import" href="web-components/carousel-wc.html">
+	<link rel="import" href="web-components/string2html-wc.html">
+
+	<link rel="import" href="paper-styles/color.html">
+	<link rel="import" href="google-map/google-map.html">
+	<!-- Styles / Resources -->
+	<link rel="icon" href="favicon.png" type="image/png"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/proyectos.css">
+	<link rel="stylesheet" type="text/css" href="css/presupuesto.css">
+	<link rel="stylesheet" type="text/css" href="css/contacto.css">
+	<link rel="stylesheet" type="text/css" href="css/info.css">
+	
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+	<!-- EmailJS -->
+	<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+	<script type="text/javascript">
+		(function(){
+			emailjs.init("user_NGLThGHngXsp6V6MGKxFk");
+		})();
+	</script>
+
+	<!-- JQuery -->
+	<script
+		src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+		crossorigin="anonymous">
+	</script>
+
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<base href="/">
+</head>
+<body ng-app="app" ng-controller="mainCtrl">
+
+	<!-- Navbar and search -->
+	<paper-toolbar class="toolbar">
+		<a class="pageBtn home" href="/" on-tap="none">Globalcocinas</a>
+	</paper-toolbar>
+
+	<paper-toolbar class="toolbar bottom">
+		<paper-icon-button icon="menu" class="menuIcon" onclick="_toggle()"></paper-icon-button>
+		<a class="pageBtn" href="/" id="tab0" on-tap="setActive"><span>Inicio</span></a>
+		<a class="pageBtn" href="/proyectos" id="tab0" on-tap="setActive"><span>Proyectos realizados</span></a>
+		<a class="pageBtn" href="/presupuesto" id="tab0" on-tap="setActive"><span>Solicitud de presupuesto</span></a>
+		<a class="pageBtn" href="/info" id="tab0" on-tap="setActive"><span>Quiénes somos</span></a>
+		<a class="pageBtn" href="/contacto" id="tab0" on-tap="setActive"><span>Contacto</span></a>
+	</paper-toolbar>
+
+	<div id="sidebar" class="sidebar">
+		<a class="sideBtn" href="/" onclick="_toggle()"><span>Inicio</span></a>
+		<a class="sideBtn" href="/proyectos" onclick="_toggle()"><span>Proyectos realizados</span></a>
+		<a class="sideBtn" href="/presupuesto" onclick="_toggle()"><span>Solicitud de presupuesto</span></a>
+		<a class="sideBtn" href="/info" onclick="_toggle()"><span>Quiénes somos</span></a>
+		<a class="sideBtn" href="/contacto" onclick="_toggle()"><span>Contacto</span></a>
+	</div>
+
+	<div id="content" class="content">
+		<ng-view></ng-view>
+	</div>
+	
+	<footer>
+		<paper-toolbar class="footer">
+			<span>
+				GlobalCocinas.com 2017
+			</span>
+		</paper-toolbar>
+	</footer>
+
+	<script>
+		var app = angular.module("app", ["ngRoute"]);
+		var viewRoot = "/views/";
+		app.config(function($routeProvider, $locationProvider) {
+		    $routeProvider
+		    .when("/", {
+		        templateUrl : viewRoot+"main.html"
+		    })
+		    .when("/proyectos", {
+		        templateUrl : viewRoot+"proyectos.html"
+		    })
+			.when("/presupuesto", {
+		        templateUrl : viewRoot+"presupuesto.html"
+		    })
+		    .when("/info", {
+		        templateUrl : viewRoot+"info.html"
+		    })
+		    .when("/contacto", {
+		        templateUrl : viewRoot+"contacto.html"
+		    })
+		    .otherwise({
+		    		redirectTo: '/'
+				});
+		    // use the HTML5 History API
+        	$locationProvider.html5Mode(true);
+		});
+		app.controller('mainCtrl', ['$scope', function($scope){
+			app.setV = function(name, value){
+				$scope.$evalAsync(function(){
+					$scope[name] = value;
+				});
+			}
+			app.getV = function(name){
+				return $scope[name];
+			}
+
+		}]);
+
+		_toggle = function(){
+				console.log("executing TOOGLE");
+				var sidebar = document.getElementById("sidebar");
+				var left = sidebar.style.left;
+				if(!left || left=="-50%"){
+					sidebar.style.left="0";
+				}
+				else{
+					sidebar.style.left="-50%";
+				}
+			};
+	</script>	
+
+</body>
+</html>

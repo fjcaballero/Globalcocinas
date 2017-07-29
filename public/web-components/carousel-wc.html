@@ -1,0 +1,134 @@
+<!--
+@license
+@author Javier Caballero Abenza. All rights reserved.
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<dom-module id="carousel-wc">
+	<template>
+
+		<iron-ajax
+			auto
+			url="http://localhost:8080/api/carousel"
+			handle-as="json"
+			on-response="carouselCategories"
+		></iron-ajax>
+		
+		<iron-ajax
+			id="categoryImages"
+			url="http://localhost:8080/api/carousel/{{category}}"
+			handle-as="json"
+			on-response="categoryImages"
+		></iron-ajax>
+
+		<style is="custom-style">
+			:host{
+				width: 100%;
+			}
+			.item.active img{
+				width: 100%;
+				height: 500px;
+			}
+			.categorias{
+				margin: 30px;
+				display: flex;
+				justify-content: center;
+			}
+
+			.categorias paper-button{
+				background-color: #2196F3;
+				color: white;
+				margin-right: 50px;
+				text-transform: capitalize;
+				font-size: 20px;
+				padding: 10px;
+			}
+
+			.carouselContainer{
+				width: 100%;
+				background-color: black;
+			}
+
+			.carousel{
+				margin: auto;
+				width: 70%;
+    			max-width: 900px;
+			}
+		</style>
+		
+		<div class="carouselContainer">
+			<div id="carousel" class="carousel slide" data-ride="carousel">
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+					<template is="dom-repeat" items="{{images}}">
+						<template is="dom-if" if="{{isFirst(index)}}">
+							<div class="item active">
+							<img src="{{category}}/{{item}}">
+							</div>
+						</template>
+						<template is="dom-if" if="{{!isFirst(index)}}">
+							<div class="item">
+								<img src="{{category}}/{{item}}">
+							</div>
+						</template>
+					</template>
+				</div>
+				<!-- Left and right controls -->
+				<a class="left carousel-control" href="#carousel" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#carousel" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+
+		<div class="categorias">
+			<template is="dom-repeat" items="{{categories}}">
+				<paper-button raised on-tap="categorySelected">{{item}}</paper-button>
+			</template>
+		</div>
+	</template>
+	<script>
+		Polymer({
+
+			is: 'carousel-wc',
+
+			properties:{
+			},
+
+			ready: function(){
+				$('.carousel').carousel({
+					interval: 4000
+				});
+
+				$('.carousel').carousel('cycle');
+			},
+
+			carouselCategories: function(e, detail){
+				this.categories = detail.response.result;
+				if(this.categories[0]){
+					this.category = this.categories[0];
+					this.$.categoryImages.generateRequest();
+				}
+			},
+
+			categorySelected: function(e){
+				this.category = e.target.innerText;
+				this.$.categoryImages.generateRequest();
+			},
+
+			categoryImages: function(detail, detail){
+				this.images = detail.response.result;
+			},
+
+			isFirst: function(index){
+				return index == 0;
+			}
+
+		});
+	</script>
+</dom-module>
