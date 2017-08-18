@@ -1,12 +1,13 @@
 {
-  "name": "javicaballero.com",
-  "description": "My web",
+  "name": "Globalcocinas",
+  "description": "Globalcocinas web page",
   "main": "app.js",
   "authors": [
     "fjcaballero"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/fjcaballero/javicaballero.com",
+  "homepage": "https://github.com/fjcaballero/Globalcocinas",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,23 +16,15 @@
     "tests"
   ],
   "dependencies": {
-    "webcomponentsjs": "^0.7.23",
-    "iron-icon": "^1.0.12",
-    "iron-icons": "^1.2.0",
-    "paper-icon-button": "^1.1.4",
-    "paper-toolbar": "^1.1.7",
-    "paper-behaviors": "^1.0.12",
-    "paper-button": "^1.0.14",
-    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
     "google-map": "^1.2.0",
-    "paper-input": "^2.0.1",
-    "paper-carousel": "Redbility/paper-carousel#^1.2.5"
-  },
-  "resolutions": {
-    "iron-icon": "^1.0.12",
-    "iron-icons": "^1.2.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#^1.0.0",
+    "paper-behaviors": "^1.0.12",
     "paper-icon-button": "^1.1.4",
+    "paper-button": "^1.0.14",
+    "paper-carousel": "Redbility/paper-carousel#^1.2.5",
+    "paper-input": "^2.0.1",
     "paper-toolbar": "^1.1.7",
-    "webcomponentsjs": "^0.7.24"
+    "shadycss": "webcomponents/shadycss#^v1.0.0"
   }
 }
