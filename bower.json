@@ -25,6 +25,10 @@
     "paper-carousel": "Redbility/paper-carousel#^1.2.5",
     "paper-input": "^2.0.1",
     "paper-toolbar": "^1.1.7",
-    "shadycss": "webcomponents/shadycss#^v1.0.0"
+    "shadycss": "webcomponents/shadycss#^v1.0.0",
+    "polymer": "1.9.3"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.7.24"
   }
 }
