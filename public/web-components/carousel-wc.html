@@ -55,6 +55,28 @@
 				width: 70%;
     			max-width: 900px;
 			}
+
+			.thumbnails{
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: center;
+				max-width: 80%;
+				margin: auto;
+			}
+
+			.thumbnail{
+				margin: 20px;
+				max-width: 200px;
+				min-width: 64px;
+			}
+
+			@media only screen and (max-device-width : 667px) {
+				.item.active img{
+					height: 200px;
+				}
+			}
+			
 		</style>
 		
 		<div class="carouselContainer">
@@ -75,6 +97,7 @@
 					</template>
 				</div>
 				<!-- Left and right controls -->
+				<!--
 				<a class="left carousel-control" href="#carousel" data-slide="prev">
 					<span class="glyphicon glyphicon-chevron-left"></span>
 					<span class="sr-only">Previous</span>
@@ -83,7 +106,16 @@
 					<span class="glyphicon glyphicon-chevron-right"></span>
 					<span class="sr-only">Next</span>
 				</a>
+				-->
 			</div>
+		</div>
+
+		<div class="thumbnails">
+			<template is="dom-repeat" items="{{images}}">
+				<a class="thumbnail" href="{{category}}/{{item}}" target="_blank">
+					<img src="{{category}}/{{item}}">
+				</a>
+			</template>
 		</div>
 
 		<div class="categorias">
@@ -100,7 +132,7 @@
 			properties:{
 			},
 
-			ready: function(){
+			attached: function(){
 				$('.carousel').carousel({
 					interval: 4000
 				});
