@@ -1,7 +1,7 @@
 {
-  "name": "javicaballero.com",
+  "name": "Globalcocinas",
   "version": "1.0.0",
-  "description": "My web",
+  "description": "Globalcocinas web page",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fjcaballero/javicaballero.com.git"
+    "url": "git+https://github.com/fjcaballero/Globalcocinas.git"
   },
   "author": "fjcaballero",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fjcaballero/javicaballero.com/issues"
+    "url": "https://github.com/fjcaballero/Globalcocinas/issues"
   },
-  "homepage": "https://github.com/fjcaballero/javicaballero.com#readme",
+  "homepage": "https://github.com/fjcaballero/Globalcocinas#readme",
   "dependencies": {
     "express": "^4.14.0",
     "bower": "^1.8.0"
