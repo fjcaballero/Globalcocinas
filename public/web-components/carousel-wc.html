@@ -10,14 +10,14 @@
 
 		<iron-ajax
 			auto
-			url="http://localhost:8080/api/carousel"
+			url="/api/carousel"
 			handle-as="json"
 			on-response="carouselCategories"
 		></iron-ajax>
 		
 		<iron-ajax
 			id="categoryImages"
-			url="http://localhost:8080/api/carousel/{{category}}"
+			url="/api/carousel/{{category}}"
 			handle-as="json"
 			on-response="categoryImages"
 		></iron-ajax>
@@ -69,6 +69,8 @@
 				margin: 20px;
 				max-width: 200px;
 				min-width: 64px;
+				display: flex;
+    			align-items: center;
 			}
 
 			@media only screen and (max-device-width : 667px) {
@@ -149,7 +151,7 @@
 			},
 
 			categorySelected: function(e){
-				this.category = e.target.innerText;
+				this.category = e.target.innerText.toLowerCase();
 				this.$.categoryImages.generateRequest();
 			},
 
