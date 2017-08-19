@@ -49,10 +49,11 @@
 			is: 'contact-wc',
 
 			properties:{
+                template: String
 			},
 
             sendEmail: function(){
-                emailjs.send("default_service","globalcocinas",
+                emailjs.send("default_service",this.template,
                 {
                     name: this.nombre, 
                     email: this.email,
