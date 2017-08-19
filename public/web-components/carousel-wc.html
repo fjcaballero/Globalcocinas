@@ -149,7 +149,7 @@
 			},
 
 			categorySelected: function(e){
-				this.category = e.target.innerText;
+				this.category = e.target.innerText.toLowerCase();
 				this.$.categoryImages.generateRequest();
 			},
 
