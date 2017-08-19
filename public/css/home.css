@@ -1,5 +1,6 @@
 .imagenHome{
     width: 100%;
+    max-height: calc(80vh);
 }
 
 .service{
@@ -25,4 +26,15 @@
 
 .service img{
     margin: 0px 40px 0px 40px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 350px;
+    height: auto;
+}
+
+@media only screen and (max-device-width : 667px) {
+    .service img{
+        height: auto;
+        margin: auto;
+    }
 }
