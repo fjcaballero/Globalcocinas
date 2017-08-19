@@ -10,14 +10,14 @@
 
 		<iron-ajax
 			auto
-			url="http://localhost:8080/api/carousel"
+			url="/api/carousel"
 			handle-as="json"
 			on-response="carouselCategories"
 		></iron-ajax>
 		
 		<iron-ajax
 			id="categoryImages"
-			url="http://localhost:8080/api/carousel/{{category}}"
+			url="/api/carousel/{{category}}"
 			handle-as="json"
 			on-response="categoryImages"
 		></iron-ajax>
